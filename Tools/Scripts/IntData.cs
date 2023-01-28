@@ -1,19 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu]
-public class IntData : ScriptableObject
+public class IntData1 : ScriptableObject
 {
-    public int danger;
+    public UnityEvent maxValueEvent, minValueEvent;
+    public int value;
 
-    public void IncreaseDanger(int killedEnemies)
+    public void SetValue(int num)
     {
-        danger += killedEnemies;
+        value = num;
     }
 
-    public void RemoveDanger(int pickupValue)
+    public void CompareValue(IntData1 obj)
     {
-        danger -= pickupValue;
+        if (value >= obj.value)
+        {
+            
+        }
+        else
+        {
+            value = obj.value;
+        }
     }
+    
+    public void SetValue(IntData1 obj)
+    {
+        value = obj.value;
+    }
+    
+    public void UpdateValue(int num)
+    {
+        value += num;
+    }
+    
+    public void CheckMinValue(int minValue)
+    {
+        if (!(value <= minValue)) return;
+        minValueEvent.Invoke();
+        value = minValue;
+    }
+
+    public void CheckMaxValue(int maxValue)
+    {
+        if (!(value >= maxValue)) return;
+        maxValueEvent.Invoke();
+        value = maxValue;
+    }
+    
 }
