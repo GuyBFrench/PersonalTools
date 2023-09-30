@@ -1,22 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Single Variables/Vector3Data")]
 public class Vector3Data : ScriptableObject
 {
-    public Vector3 attack;
-
-    public void AttackFromAbove(Vector3 playerPos)
-    {   
-        playerPos.y += 10;
-        attack = playerPos;
-    }
-
-    public void TeleportToPlayer(Vector3 playerPos)
+    public Vector3 value;
+       
+    public void UpdateValue(Transform obj)
     {
-        
-        attack = playerPos;
+        value = obj.position;
     }
 
+    public void UpdateTransform(Transform obj)
+    {
+        obj.localPosition = value;  
+    }
 }
