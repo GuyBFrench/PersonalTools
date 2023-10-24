@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu]
-public class FloatData1 : ScriptableObject
+public class FloatData : ScriptableObject
 {
     public float value;
     public UnityEvent minValueEvent, maxValueEvent, updateValueEvent;
@@ -24,12 +24,12 @@ public class FloatData1 : ScriptableObject
         value++;
     }
 
-    public void UpdateValue(FloatData1 data)
+    public void UpdateValue(FloatData data)
     {
         if (data != null) value += data.value;
     }
 
-    public void SetValue(FloatData1 data)
+    public void SetValue(FloatData data)
     {
         if (data != null) value = data.value;
     }

@@ -13,7 +13,7 @@ public class ImageBehaviour : MonoBehaviour
         startEvent.Invoke();
     }
 
-    public void UpdateImage(FloatData1 obj)
+    public void UpdateImage(FloatData obj)
     {
         img.fillAmount = obj.value;
     }
