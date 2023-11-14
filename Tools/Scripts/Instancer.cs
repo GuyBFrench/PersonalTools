@@ -4,6 +4,7 @@ using UnityEngine;
 public class Instancer : ScriptableObject
 {
     public GameObject prefab;
+    public PrefabListSo prefabList;
     private int num = 0;
 
     public void CreateInstance()
@@ -18,11 +19,11 @@ public class Instancer : ScriptableObject
         }
     }
 
-    public void CreateInstance(Vector3Data positionData, Quaternion rotation = default)
+    public void CreateInstance(Vector3Data positionData)
     {
         if (prefab != null && positionData != null)
         {
-            Instantiate(prefab, positionData.value, rotation);
+            Instantiate(prefab, positionData.value, Quaternion.identity);
         }
         else
         {
@@ -30,13 +31,13 @@ public class Instancer : ScriptableObject
         }
     }
 
-    public void CreateInstanceFromList(Vector3DataList positions, Quaternion rotation = default)
+    public void CreateInstanceFromList(Vector3DataList positions)
     {
         if (prefab != null && positions != null)
         {
             foreach (var positionData in positions.vector3DList)
             {
-                Instantiate(prefab, positionData.value, rotation);
+                Instantiate(prefab, positionData.value, Quaternion.identity);
             }
         }
         else
@@ -45,11 +46,11 @@ public class Instancer : ScriptableObject
         }
     }
 
-    public void CreateInstanceFromListCounting(Vector3DataList positions, Quaternion rotation = default)
+    public void CreateInstanceFromListCounting(Vector3DataList positions)
     {
         if (prefab != null && positions != null && positions.vector3DList.Count > 0)
         {
-            Instantiate(prefab, positions.vector3DList[num].value, rotation);
+            Instantiate(prefab, positions.vector3DList[num].value, Quaternion.identity);
             num++;
             if (num == positions.vector3DList.Count)
             {
@@ -62,12 +63,12 @@ public class Instancer : ScriptableObject
         }
     }
 
-    public void CreateInstanceListRandomly(Vector3DataList positions, Quaternion rotation = default)
+    public void CreateInstanceListRandomly(Vector3DataList positions)
     {
         if (prefab != null && positions != null && positions.vector3DList.Count > 0)
         {
             num = Random.Range(0, positions.vector3DList.Count);
-            Instantiate(prefab, positions.vector3DList[num].value, rotation);
+            Instantiate(prefab, positions.vector3DList[num].value, Quaternion.identity);
         }
         else
         {
@@ -75,7 +76,7 @@ public class Instancer : ScriptableObject
         }
     }
 
-    public void CreateRandomPrefabFromList(PrefabListSo prefabList, Vector3Data positionData, Quaternion rotation = default)
+    public void CreateRandomPrefabFromList(Vector3Data positionData)
     {
         if (prefabList != null && prefabList.Prefabs.Length > 0 && positionData != null)
         {
@@ -84,7 +85,7 @@ public class Instancer : ScriptableObject
             
             if (randomPrefab != null)
             {
-                Instantiate(randomPrefab, positionData.value, rotation);
+                Instantiate(randomPrefab, positionData.value, Quaternion.identity);
             }
             else
             {
