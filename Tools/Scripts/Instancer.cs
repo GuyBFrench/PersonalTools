@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Instancer : ScriptableObject
 {
-    public GameObject prefab;
+    public GameObject prefab, obj;
     public PrefabListSo prefabList;
     private int num = 0;
 
@@ -78,14 +78,18 @@ public class Instancer : ScriptableObject
 
     public void CreateRandomPrefabFromList(Vector3Data positionData)
     {
+        Debug.Log("Attempting to create random prefab...");
+
         if (prefabList != null && prefabList.Prefabs.Length > 0 && positionData != null)
         {
             int randomIndex = Random.Range(0, prefabList.Prefabs.Length);
             GameObject randomPrefab = prefabList.Prefabs[randomIndex];
-            
+
             if (randomPrefab != null)
             {
+                Debug.Log($"Spawn Location: {positionData.value}");
                 Instantiate(randomPrefab, positionData.value, Quaternion.identity);
+                Debug.Log("Prefab instantiated successfully.");
             }
             else
             {
@@ -97,4 +101,5 @@ public class Instancer : ScriptableObject
             Debug.LogWarning("Prefab list, prefab count, or position data is invalid. Unable to instantiate random prefab from the list.");
         }
     }
+
 }

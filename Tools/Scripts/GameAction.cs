@@ -9,5 +9,6 @@ public class GameAction : ScriptableObject
     public void RaiseAction()
     {
         raise?.Invoke();
+        Debug.Log("Raise Action");
     }
 }
