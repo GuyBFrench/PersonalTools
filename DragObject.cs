@@ -7,6 +7,7 @@ public class DragObject : MonoBehaviour
 {
     private Vector3 mousePosition;
     private bool isDragging = false;
+    public bool draggable = true;
 
     [Header("Events")]
     public UnityEvent onDragStart, onDragStop;
@@ -18,12 +19,16 @@ public class DragObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        mousePosition = Input.mousePosition - GetMousePos();
-        isDragging = true;
-        if (isDragging)
+        if (draggable)
         {
-            onDragStart.Invoke();
+           mousePosition = Input.mousePosition - GetMousePos();
+           isDragging = true;
+           if (isDragging)
+           {
+               onDragStart.Invoke();
+           } 
         }
+        
     }
 
     private void OnMouseDrag()
@@ -43,6 +48,10 @@ public class DragObject : MonoBehaviour
         }
     }
 
+    public void StopDrag()
+    {
+        draggable = false;
+    }
     private void OnDestroy()
     {
         if (isDragging)
